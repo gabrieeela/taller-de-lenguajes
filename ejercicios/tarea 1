@@ -1,0 +1,133 @@
+L. Formales vs L. Natural
+--------------------------
+
+sintaxis        -  semántica
+(no ambiguedad)   (se acepta ambiguedad)
+
+tipos:
+LReg - ER - AF
+LIndepContexto - GIC - AP (Parsers)
+LDepContexto
+LRecursivEnumerables
+
+PFuente para Java
+public class Punto {
+	
+}
+
+Parsers:
+ ASD con retroceso, ASD predictivos (LL(1))
+ ASA con retroceso, ASA predictivos (SLR, LR(0), LR(1), LALR)
+ LALR: Look Ahead Left to Right Righmost Derivation
+
+GIC:
+<ΣT, ΣN, P, S>
+ΣT: alfabeto de simbolos terminales, conjunto finito y no vacio
+ΣN: alfabeto de simbolos NO terminales, conjunto finito y no vacio
+S: símbolo distinguido, axioma, start  S ∈ ΣN
+P: son las reglas IZQ -> DER, conjunto finito y no vacio de reglas
+
+Sirven para generar las palabras de un lenguaje
+
+r1, r2, c(r1, r2), g(r1)
+
+
+PF1: c(g(g(r1)), r2)
+PF2: r1
+PF3: r2
+PF4: c(r1, r2)
+PF5: g(r1)
+PF6: g(g(g(r1)))
+
+PF necesita ser traducido para obtener el PO 
+o para directamente hacer la ejecución
+
+traducción: compilador
+
+S -> r1 | r2 | g(S) | c(S, S)
+
+S => c(S, S)
+  => c(g(S), S)
+  => c(g(g(S)), S)
+  => c(g(g(r1)), S)
+  => c(g(g(r1)), r2)
+
+ΣT = {r1, r2, g, (,), ',', c}
+ΣN = {S}
+S  = S
+P  = { (S -> r1), (S -> r2), (S -> g(S)), (S -> c(S, S)) } 
+
+-----------------------------------------
+
+L = {1+1, 1+2+3, ...}
+ΣT = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, +}
+
+S -> 1+1 | 1+2+3 ...
+
+S -> N + N | S + N
+N -> 0 | 1 | ... | 9
+
+S => N + N => 1 + N => 1 + 1
+S => S + N => N + N + N => 1 + N + N => 1 + 2 + N => 1 + 2 + 3
+
+ΣN = {S, N}
+
+
+S -> N | S + N
+N -> 0 | 1 | ... | 9
+
+S => S + N => S + N + N
+
+Identificador válido: aa0
+
+Id => Id D
+   => Id L D
+   => L L D
+   => a L D
+   => a a D
+   => a a 0
+
+Identificador no válido: 1c
+
+Id => Id L
+   => Id D L
+   => L D L
+
+1 + 2 * 4 = 9
+(1 + 2) * 4 = 12
+
+SENTENCIA_DE_ITERACION
+sentenciaDeIteración
+
+<sentencia de iteracion>
+::=
+|
+
+<program> ::= begin <stmt_list> end
+<stmt_list> ::= <stmt> | <stmt> ; <stmt_list>
+<stmt> ::= <var> = <expression>
+<var> ::= A | B | C
+<expression> ::= <var> + <var> | <var> - <var> | <var>
+
+begin A = A end
+begin A = B end
+begin A = C end
+begin B = A end
+begin A = A + B end
+begin A = A ; A = B end
+
+
+S -> aA | b
+A -> cS
+
+
+TAREA:
+
+1. Que hace que un lenguaje de programación sea considerado lenguaje web? Dentro del contexto de sintaxis
+
+2. Ir a las GIC de java o de python y derivar en la gramática alguna construcción sintáctica relevante (if, while, método o función)
+Derivación horizontal + vertical (Arbol Análisis Sintáctico)
+
+
+Java	https://docs.oracle.com/javase/specs/jls/se7/html/jls-18.html
+Python	https://docs.python.org/3/reference/grammar.html

@@ -124,6 +124,9 @@ A -> cS
 TAREA:
 
 1. Que hace que un lenguaje de programación sea considerado lenguaje web? Dentro del contexto de sintaxis
+En programación, la sintaxis se refiere a las reglas que rigen la estructura de los símbolos, las palabras y la puntuación que se encuentran en los lenguajes de programación, 
+definiendo el significado de las distintas combinaciones de símbolos, identificando las palabras clave y los símbolos válidos que un programador puede utilizar para escribir su código fuente.
+Dentro de este contexto, un lenguaje de programación se considera web si su sintaxis y características están optimizadas para el desarrollo y la interacción en entornos de navegador.
 
 2. Ir a las GIC de java o de python y derivar en la gramática alguna construcción sintáctica relevante (if, while, método o función)
 Derivación horizontal + vertical (Arbol Análisis Sintáctico)

@@ -131,19 +131,17 @@ Dentro de este contexto, un lenguaje de programación se considera web si su sin
 2. Ir a las GIC de java o de python y derivar en la gramática alguna construcción sintáctica relevante (if, while, método o función)
 Derivación horizontal + vertical (Arbol Análisis Sintáctico)
 
-public class Principal {
+public class x {
     public static void main(String[] args) {
-        int numero = 20;
+        int z = 5;
          
-        if(numero > 18) {
-            System.out.println("El número es mayor a 18");
+        if(z > 10) {
+            return true;
         }
          
         else {
-            System.out.println("El número es menor a 18");  
+            return false;  
         }
-
-        System.out.println("Programa finalizado");
     }
 }
 
@@ -151,15 +149,38 @@ Derivación Horizontal:
 <programa>:= public class <id> { <cuerpo> }
 <cuerpo>:= public static void main(String[] args { <listasentencias> }
 <listasentencias>:= <sentencia> | <sentencia> ; <listasentencias>
-<sentencia>:= <declaracion_variable> | <if> | <bloque>
-<declaracion_variable>:= <tipo><id> ;
-<tipo>:= int | String
-<id>:= <letra> { <letra> | <digito> }*
+<sentencia>:= <declaracion_variable> | <if> | <bloque> | return <boolean>;
+<declaracion_variable>:= <tipo><id> = <digitos> ;
+<digitos>:= <digito> | <digitos><digito>
+<tipo>:= int 
+<id>:= <letra> 
 <letra>:= a|b|c|d|...|w|x|y|z
 <digito>:= 0|1|2|3|4|5|6|7|8|9
 <if>:= if (<expresionbooleana>) <bloque> | if (<expresionbooleana>) <bloque> else <bloque>
-<expresionbooleana>:= <id><operadoresrelacionales><tipo>
+<expresionbooleana>:= <id><operadoresrelacionales><digitos>
 <operadoresrelacionales>:= <|>|=|<=|>=|!=
 <bloque>:= { <listasentencias> }
+<boolean>:= true | false
 
-
+Arbol de derivacipon vertical
+          <programa>
+              |
+public class <id> { <cuerpo> }
+             /          \
+       <letra>    public static void main(String[] args { <listasentencias> }
+          |                                                        |
+          x                                          <sentencia> ; <listasentencias>
+                                                      /                        \
+                                     <declaracion_variable>                 <sentencia>
+                                               |                                 |
+                                    <tipo><id> = <digitos> ;                    <if>
+                                      /     |        \                           |   
+                                    int     z         5         if (<expresionbooleana>)  <bloque>  else  <bloque> 
+                                                                       /                      |                  \
+                                                   <id><operadoresrelacionales><tipo>   {<listasentencias>}  {<listasentencias>}
+                                                     /              |             \           |                     | 
+                                                    z               >             10     <sentencia>;          <sentencia>;     
+                                                                                              |                     |
+                                                                                     return <boolean>;       return <boolean>;
+                                                                                                 \                       \
+                                                                                                true                    false
